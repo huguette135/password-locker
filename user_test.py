@@ -1,105 +1,36 @@
-
-import unittest
-from user import User
-from credential import Credential
-
-
-class TestUser(unittest.TestCase):
+def save_users(user):
     '''
-    Test class that defines test cases for the User Class behaviours
+    Function to save a user account
     Args:
-        unittest.TestCase : Test case class that helps create test cases
+        user : the user account to be saved
     '''
 
-    def setUp(self):
-        '''
-        Set up method to run before each test case
-        '''
+    user.save_user()
 
-        # Create user object
-        self.new_user = User("John","doe")
+def check_existing_users(name):
+    '''
+    Function that checks if a user account name already exists
+    Args:
+        name : the user account name
+    '''
 
+    return User.user_exist(name)
 
-    def tearDown(self):
-        '''
-        tearDown method that cleans up after each test case is run
-        '''
+def user_log_in(name, password):
+    '''
+    Function that allows a user to log into their credential account
+    Args:
+        name : the name the user used to create their user account
+        password : the password the user used to create their user account
+    '''
+    log_in = User.log_in(name, password)
+    if log_in != False:
+        return User.log_in(name, password)
 
-        User.user_list = []
+def display_users():
+    '''
+    Function that returns all the saved users 
+    '''
 
-    def test_init(self):
-        '''
-        Test case to test if the object is initialised properly
-        '''
+    return User.display_user()
 
-        self.assertEqual( self.new_user.user_name, "John" )
-        self.assertEqual( self.new_user.user_password, "doe" )
-
-    def test_save_user(self):
-        '''
-        Test case to test if the user object is saved into the user list
-        '''
-
-        # Saving the new user
-        self.new_user.save_user()
-
-        self.assertEqual( len(User.user_list), 1 )
-
-    def test_save_multiple_users(self):
-        '''
-        Test case to test if you can save multiple objects to user list
-        '''
-
-        # Save the new user
-        self.new_user.save_user()
-
-        test_user = User("Jane","doey")
-
-        test_user.save_user()
-
-        self.assertEqual( len(User.user_list), 2)
-
-    def test_log_in(self):
-        '''
-        Test case to test if a user can log into their credentials
-        '''
-
-        # Save the new user
-        self.new_user.save_user()
-
-        test_user = User("Jane","doey")
-
-        test_user.save_user()
-
-        found_credential = User.log_in("Jane", "doey")
-
-        self.assertEqual( found_credential,  Credential.credential_list )   
-    
-    def test_display_user(self):
-        '''
-        Test case to test if a user can see a list of all the users saved
-        '''
-        
-        self.assertEqual( User.display_user() , User.user_list )
-        
-    def test_user_exist(self):
-        
-        '''
-        Test to check if we can return a boolean if we can't find the user
-        '''
-        
-        # Save the new user
-        self.new_user.save_user()
-
-        test_user = User("Jane","doey")
-
-        test_user.save_user()
-        
-        # use contact exist method
-        user_exists = User.user_exist("Jane")
-        
-        self.assertTrue(user_exists)
-
-
-if __name__ == '__main__':
-    unittest.main(verbosity=2)
