@@ -43,4 +43,19 @@ Credential.credential_list.append(self)
         password = ''.join( choice(alphanum) for num in range(size) )
         
         return password
+        @classmethod
+    def display_credential(cls,password):
+        '''
+        Method that returns the credential list
+        Args:
+            password : the user password
+        '''
+        user_credential_list = []
+
+        for credential in cls.credential_list:
+            if credential.user_password == password:
+                user_credential_list.append(credential)
+
+        return user_credential_list
+    
 
