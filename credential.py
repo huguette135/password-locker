@@ -57,5 +57,26 @@ Credential.credential_list.append(self)
                 user_credential_list.append(credential)
 
         return user_credential_list
-    
+    def delete_credential(self):
+        '''
+        Method that deletes a user's credentials from credential list
+        '''
+        Credential.credential_list.remove(self)
+    @classmethod
+    def find_by_name(cls, name):
+        
+        '''
+        Method that takes in an account name and returns its credentials.
+        
+        Args:
+            account: account name to search for 
+            
+        Returns:
+            credentials of an account name that matches the search .
+            
+        '''
+        
+        for credential in cls.credential_list:
+            if credential.credential_name == name:
+                return credential
 
