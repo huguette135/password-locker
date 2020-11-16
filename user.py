@@ -1,36 +1,78 @@
 
-def save_users(user):
+from credential import Credential
+
+'''
+User class : for creating a password locker account
+'''
+
+class User:
     '''
-    Function to save a user account
-    Args:
-        user : the user account to be saved
+    Class that generates instances of user accounts
     '''
 
-    user.save_user()
+    # Empty list of users
+    user_list = []
 
-def check_existing_users(name):
-    '''
-    Function that checks if a user account name already exists
-    Args:
-        name : the user account name
-    '''
+    def __init__(self, user_name, user_password):
+        '''
+        __init__ method to define the properties of a User object
+        Args:
+            user_name : name of a user
+            user_password : password for a user
+        '''
 
-    return User.user_exist(name)
+        self.user_name = user_name
+        self.user_password = user_password
 
-def user_log_in(name, password):
-    '''
-    Function that allows a user to log into their credential account
-    Args:
-        name : the name the user used to create their user account
-        password : the password the user used to create their user account
-    '''
-    log_in = User.log_in(name, password)
-    if log_in != False:
-        return User.log_in(name, password)
+    def save_user(self):
+        '''
+        Method that saves a user to user list
+        '''
+        User.user_list.append(self)
 
-def display_users():
-    '''
-    Function that returns all the saved users 
-    '''
+    @classmethod
+    def log_in(cls, name, password):
+        '''
+        Method that allows a user to log into their credential
+        Args:
+            name : name of the user
+            password : password for the user
+        Returns:
+            Credential list for the user that matches the name and password
+            False: if the name or password is incorrect
+        '''
 
-    return User.display_user()
+        # Search for the user in the user list
+        for user in cls.user_list:
+            if user.user_name == name and user.user_password == password:
+                return Credential.credential_list
+
+        return False
+
+    @classmethod
+    def display_user(cls):
+        '''
+        Method that returns the user list
+        '''
+        
+        return cls.user_list
+    
+    @classmethod
+    def user_exist(cls, name):
+        '''
+        Method that checks if a user exists in the user list
+        
+        Args:
+            name: name of the user to search
+            
+        Returns:
+            Boolean: true/false depending if the user exists
+            
+        '''
+        
+        for user in cls.user_list:
+            if user.user_name == name:
+                return True
+            
+        return False
+
