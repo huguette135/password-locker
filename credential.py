@@ -21,3 +21,7 @@ class Credential:
             credential_name : name of an account
             credential_password : password for the account
         '''
+        self.user_password = user_password
+        self.credential_name = credential_name
+        self.credential_password = credential_password
+
