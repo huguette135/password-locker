@@ -52,4 +52,6 @@ class TestCredential(unittest.TestCase):
         test_credential.save_credential()
 
         self.assertEqual( len(Credential.credential_list), 2)
+        
+
 
