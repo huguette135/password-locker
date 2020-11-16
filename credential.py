@@ -36,4 +36,11 @@ Credential.credential_list.append(self)
         '''
         # Length of the generated password
         size = 8
+        # Generate random alphanumeric 
+        alphanum = string.ascii_uppercase + string.digits + string.ascii_lowercase
+
+        # Create password
+        password = ''.join( choice(alphanum) for num in range(size) )
+        
+        return password
 
